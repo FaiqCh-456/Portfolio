@@ -28,7 +28,34 @@ const CategoryIcons = {
       fill="currentColor"
       className="w-6 h-6 text-[var(--sec)] opacity-70"
     >
-      <path d="M5.7646 7.99998L5.46944 7.26944C5.26255 6.75737 5.50995 6.17454 6.02202 5.96765L15.2939 2.22158C15.8059 2.01469 16.3888 2.26209 16.5956 2.77416L22.2147 16.6819C22.4216 17.194 22.1742 17.7768 21.6622 17.9837L12.3903 21.7298C11.8783 21.9367 11.2954 21.6893 11.0885 21.1772L11.0002 20.9586V21H7.00021C6.44792 21 6.00021 20.5523 6.00021 20V19.7303L2.65056 18.377C2.13849 18.1701 1.89109 17.5873 2.09798 17.0752L5.7646 7.99998ZM8.00021 19H10.2089L8.00021 13.5333V19ZM6.00021 12.7558L4.32696 16.8972L6.00021 17.6084V12.7558ZM7.69842 7.44741L12.5683 19.5008L19.9858 16.5039L15.1159 4.45055L7.69842 7.44741ZM10.6766 9.47974C10.1645 9.68663 9.5817 9.43924 9.37481 8.92717C9.16792 8.4151 9.41532 7.83227 9.92739 7.62538C10.4395 7.41849 11.0223 7.66588 11.2292 8.17795C11.4361 8.69002 11.1887 9.27286 10.6766 9.47974Z"></path>
+      <path d="M5.7646 7.99998L5.46944 7.26944C5.26255 6.75737 5.50995 6.17454 6.02202 5.96765L15.2939 2.22158C15.8059 2.01469 16.3888 2.26209 16.5956 2.77416L22.2147 16.6819C22.4216 17.194 22.1742 17.7768 21.6622 17.9837L12.3903 21.7298C11.8783 21.9367 11.2954 21.6893 11.0885 21.1772L11.0002 20.9586V21H7.00021C6.44792 21 6.00021 20.5523 6.00021 20V19.7303L2.65056 18.377C2.13849 18.1701 1.89109 17.5873 2.09798 17.0752L5.7646 7.99998Z"></path>
+    </svg>
+  ),
+  "AI / Machine Learning": (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      className="w-6 h-6 text-[var(--sec)] opacity-70"
+    >
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 
+               10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.83.48-5.51-.3-7.56-2.06l1.41-1.41A7.962 
+               7.962 0 0012 20c.34 0 .68-.02 1-.07v.14zM4.07 
+               13H2.05c.26-2.3 1.19-4.39 2.65-6.05l1.42 1.42A7.93 
+               7.93 0 004.07 13zm1.42-7.19A9.94 9.94 0 0112 2c.34 
+               0 .68.02 1 .07v2.02c-2.3.26-4.39 1.19-6.05 
+               2.65L5.49 5.81z"></path>
+    </svg>
+  ),
+  "Backend & APIs": (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      className="w-6 h-6 text-[var(--sec)] opacity-70"
+    >
+      <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 
+               5h18v2H3v-2z"></path>
     </svg>
   ),
 };
@@ -37,14 +64,25 @@ const SkillsList = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
 
   const skills = {
+    "AI / Machine Learning": [
+      "Custom deep learning model training",
+      "Computer Vision (object detection, classification, segmentation)",
+      "Model optimization with CUDA & TensorRT",
+      "Frameworks: PyTorch, TensorFlow, NVIDIA DeepStream",
+    ],
+    "Backend & APIs": [
+      "FastAPI & REST APIs",
+      "Real-time WebSockets",
+      "Backend pipelines for AI systems",
+    ],
+    "Mobile Development": [
+      "React Native applications",
+      "Mobile-friendly AI-powered apps",
+    ],
     "Web Development": [
       "Single Page Applications (SPAs)",
       "Landing pages and business websites",
       "Portfolio websites",
-    ],
-    "Mobile Development": [
-      "Mobile-friendly web apps",
-      "React Native mobile apps",
     ],
     "UI/UX Design & Prototyping": [
       "UI design with Figma & Canva",

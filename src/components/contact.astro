@@ -5,20 +5,26 @@
       Contact
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Left side info -->
       <div class="text-[var(--white-icon)]">
         <p class="mb-4">
           Have a question or a project in mind? Feel free to reach out.
         </p>
         <div class="flex items-center gap-2">
-          <span>Location:</span>
-          <span class="text-[var(--white)]">Colombia, Valle del cauca</span>
+          <span>📍 Location:</span>
+          <span class="text-[var(--white)]">Lahore, Pakistan</span>
+        </div>
+        <div class="flex items-center gap-2 mt-2">
+          <span>✉️ Email:</span>
+          <span class="text-[var(--white)]">faiqyousaf25@gmail.com</span>
         </div>
       </div>
 
+      <!-- Right side form -->
       <div>
         <form
           id="contact-form"
-          action="https://formspree.io/f/mnnjznkj"
+          action="https://formspree.io/f/xnnzebab"
           method="POST"
           class="flex flex-col gap-4"
         >
@@ -27,34 +33,49 @@
             name="from_name"
             placeholder="Name"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] transition-all"
           />
           <input
             type="email"
             name="reply_to"
             placeholder="Email"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] transition-all"
           />
           <textarea
             name="message"
             placeholder="Message"
             rows="6"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
+            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none transition-all"
           ></textarea>
           <button
+            id="submit-btn"
             type="submit"
-            class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
+            class="flex items-center justify-center gap-2 px-4 py-2 bg-[var(--sec)] text-[var(--white)] rounded-lg transition-all border border-[var(--sec)] hover:bg-[var(--sec-hover)]"
           >
-            Submit
+            <span id="btn-text">Submit</span>
+            <span
+              id="btn-loader"
+              class="hidden w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
+            ></span>
           </button>
         </form>
+
+        <!-- Success message -->
         <div
-          id="form-message"
-          class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
+          id="form-success"
+          class="hidden mt-4 p-4 text-green-400 bg-green-900/20 border border-green-500 rounded-lg animate-fadeIn"
         >
-          ✅ Thank you for your message!
+          ✅ Thank you for your message! I’ll get back to you soon.
+        </div>
+
+        <!-- Error message -->
+        <div
+          id="form-error"
+          class="hidden mt-4 p-4 text-red-400 bg-red-900/20 border border-red-500 rounded-lg animate-fadeIn"
+        >
+          ❌ Oops! Something went wrong. Please try again.
         </div>
       </div>
     </div>
@@ -63,11 +84,19 @@
 
 <script type="module" is:inline>
   const form = document.getElementById("contact-form");
-  const formMessage = document.getElementById("form-message");
+  const submitBtn = document.getElementById("submit-btn");
+  const btnText = document.getElementById("btn-text");
+  const btnLoader = document.getElementById("btn-loader");
+  const successMsg = document.getElementById("form-success");
+  const errorMsg = document.getElementById("form-error");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
+
+    // Show loading
+    btnText.textContent = "Sending...";
+    btnLoader.classList.remove("hidden");
 
     try {
       const response = await fetch(form.action, {
@@ -75,18 +104,38 @@
         body: formData,
         headers: { Accept: "application/json" },
       });
+
+      btnText.textContent = "Submit";
+      btnLoader.classList.add("hidden");
+
       if (response.ok) {
         form.reset();
-        form.style.display = "none";
-        formMessage.classList.remove("hidden");
+        form.classList.add("hidden");
+        successMsg.classList.remove("hidden");
       } else {
-        const data = await response.json();
-        console.error("Error response:", data);
-        alert("There was a problem sending your message.");
+        errorMsg.classList.remove("hidden");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("There was a problem sending your message.");
+      btnText.textContent = "Submit";
+      btnLoader.classList.add("hidden");
+      errorMsg.classList.remove("hidden");
     }
   });
 </script>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+</style>
